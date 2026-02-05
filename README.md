@@ -32,23 +32,28 @@ A modern web application for hikers and trekkers to manage gear, optimize pack w
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd packlite-v2
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Set up environment variables:
+
    ```bash
    cp .env.example .env.local
    ```
+
    Then edit `.env.local` with your actual values.
 
 4. Run the development server:
+
    ```bash
    npm run dev
    ```

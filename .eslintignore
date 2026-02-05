@@ -1,0 +1,4 @@
+*.json
+*.md
+package-lock.json
+.github/
