@@ -1,4 +1,6 @@
 import '@/styles/globals.css'
+import SessionProvider from '@/components/providers/session-provider'
+import Header from '@/components/organisms/header'
 
 export const metadata = {
   title: 'Packlite - Smart Hiking Packing Lists',
@@ -8,7 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SessionProvider>
+          <Header />
+          {children}
+        </SessionProvider>
+      </body>
     </html>
   )
 }
