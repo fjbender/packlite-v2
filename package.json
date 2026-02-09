@@ -1,7 +1,7 @@
 {
   "name": "packlite-v2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Modern web application for hikers and trekkers to manage gear, optimize pack weight, and create trip packing lists",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -12,11 +12,23 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
     "test": "echo \"No tests configured yet\" && exit 0",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:init": "tsx scripts/init-db.ts",
+    "db:seed": "tsx scripts/seed-db.ts",
+    "db:reset": "tsx scripts/reset-db.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "hiking",
+    "backpacking",
+    "gear",
+    "packing-list",
+    "weight-optimization",
+    "trip-planning",
+    "outdoor",
+    "trekking"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.20",
@@ -35,7 +47,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
+    "@eslint/eslintrc": "^3.3.3",
     "autoprefixer": "^10.4.24",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.6",
@@ -44,6 +56,7 @@
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0"
   }
 }

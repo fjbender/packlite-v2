@@ -17,6 +17,29 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-4">
+            {status === 'authenticated' && (
+              <div className="flex items-center gap-6 mr-4">
+                <Link
+                  href="/gear"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium"
+                >
+                  Gear
+                </Link>
+                <Link
+                  href="/pantry"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium"
+                >
+                  Pantry
+                </Link>
+                <Link
+                  href="/trips"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium"
+                >
+                  Trips
+                </Link>
+              </div>
+            )}
+
             {status === 'loading' && <div className="text-sm text-gray-600">Loading...</div>}
 
             {status === 'unauthenticated' && (

@@ -52,7 +52,6 @@ A modern web application for hikers and trekkers to manage gear, optimize pack w
    ```
 
    Edit `.env.local` with your actual values. For MongoDB, you have three options:
-
    - **Option 1 (Recommended)**: Use Docker Compose (see below)
    - **Option 2**: Use local MongoDB without authentication
    - **Option 3**: Use MongoDB Atlas cloud (get connection string from Atlas)
@@ -64,7 +63,6 @@ A modern web application for hikers and trekkers to manage gear, optimize pack w
    ```
 
    This will start:
-
    - MongoDB on `localhost:27017` (with authentication)
    - Mongo Express (web UI) on `http://localhost:8081`
      - Username: `admin`
@@ -82,15 +80,35 @@ A modern web application for hikers and trekkers to manage gear, optimize pack w
    docker-compose down -v
    ```
 
-5. Run the development server:
+5. Initialize the database:
+
+   ```bash
+   npm run db:init
+   ```
+
+   This creates all necessary collections and indexes. It's idempotent (safe to run multiple times).
+
+   Optionally, seed with demo data:
+
+   ```bash
+   npm run db:seed
+   ```
+
+   This creates a demo user and sample gear/trips for testing:
+   - Email: `demo@packlite.com`
+   - Password: `Demo1234!`
+
+6. Run the development server:
 
    ```bash
    npm run dev
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+7. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
+
+### Development
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -99,6 +117,12 @@ A modern web application for hikers and trekkers to manage gear, optimize pack w
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting
 - `npm run type-check` - Run TypeScript type checking
+
+### Database Management
+
+- `npm run db:init` - Initialize database (create collections and indexes)
+- `npm run db:seed` - Seed database with demo data
+- `npm run db:reset` - Reset database (drop all collections and reinitialize)
 
 ## Docker Services
 
