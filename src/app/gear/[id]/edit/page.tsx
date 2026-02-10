@@ -5,20 +5,29 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import GearForm from '@/features/gear/components/gear-form'
 
-export default function EditGearPage({ params }: { params: { id: string } }) {
+export default function EditGearPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isFetching, setIsFetching] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [gearData, setGearData] = useState<any>(null)
+  const [gearId, setGearId] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchGear()
-  }, [params.id])
+    params.then(p => setGearId(p.id))
+  }, [params])
+
+  useEffect(() => {
+    if (gearId) {
+      fetchGear()
+    }
+  }, [gearId])
 
   const fetchGear = async () => {
+    if (!gearId) return
+    
     try {
-      const response = await fetch(`/api/gear/${params.id}`)
+      const response = await fetch(`/api/gear/${gearId}`)
       if (!response.ok) throw new Error('Failed to fetch gear')
 
       const data = await response.json()
@@ -31,11 +40,13 @@ export default function EditGearPage({ params }: { params: { id: string } }) {
   }
 
   const handleSubmit = async (data: any) => {
+    if (!gearId) return
+    
     setIsLoading(true)
     setError(null)
 
     try {
-      const response = await fetch(`/api/gear/${params.id}`, {
+      const response = await fetch(`/api/gear/${gearId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -98,7 +109,7 @@ export default function EditGearPage({ params }: { params: { id: string } }) {
           )}
 
           <GearForm
-            initialData={{ ...gearData, id: params.id }}
+            initialData={{ ...gearData, id: gearId }}
             onSubmit={handleSubmit}
             onCancel={() => router.push('/gear')}
             isLoading={isLoading}
