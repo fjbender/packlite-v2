@@ -14,7 +14,7 @@ export default function EditGearPage({ params }: { params: Promise<{ id: string 
   const [gearId, setGearId] = useState<string | null>(null)
 
   useEffect(() => {
-    params.then(p => setGearId(p.id))
+    params.then((p) => setGearId(p.id))
   }, [params])
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function EditGearPage({ params }: { params: Promise<{ id: string 
 
   const fetchGear = async () => {
     if (!gearId) return
-    
+
     try {
       const response = await fetch(`/api/gear/${gearId}`)
       if (!response.ok) throw new Error('Failed to fetch gear')
@@ -41,7 +41,7 @@ export default function EditGearPage({ params }: { params: Promise<{ id: string 
 
   const handleSubmit = async (data: any) => {
     if (!gearId) return
-    
+
     setIsLoading(true)
     setError(null)
 

@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { formatDate, formatWeight } from '@/lib/utils'
 import MealPlanner from '@/features/trips/components/meal-planner'
+import CategoryWeightPieChart from '@/components/molecules/category-weight-pie-chart'
 
 interface GearItem {
   id: string
@@ -372,19 +373,31 @@ export default function TripDetailPage() {
       {categoryWeights.length > 0 && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Weight by Category</h2>
-          <div className="space-y-2">
-            {categoryWeights.map(({ category, weight, count }) => (
-              <div
-                key={category}
-                className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0"
-              >
-                <div className="flex-1">
-                  <span className="text-sm font-medium text-gray-900">{category}</span>
-                  <span className="ml-2 text-xs text-gray-500">({count} items)</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Table */}
+            <div className="space-y-2">
+              {categoryWeights.map(({ category, weight, count }) => (
+                <div
+                  key={category}
+                  className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0"
+                >
+                  <div className="flex-1">
+                    <span className="text-sm font-medium text-gray-900">{category}</span>
+                    <span className="ml-2 text-xs text-gray-500">({count} items)</span>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-900">
+                    {formatWeight(weight)}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold text-gray-900">{formatWeight(weight)}</span>
-              </div>
-            ))}
+              ))}
+            </div>
+            {/* Pie Chart */}
+            <div className="flex items-center justify-center min-h-[300px]">
+              <CategoryWeightPieChart
+                categoryWeights={categoryWeights}
+                formatWeight={formatWeight}
+              />
+            </div>
           </div>
         </div>
       )}
